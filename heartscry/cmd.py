@@ -17,8 +17,12 @@ def parse_args():
     subparsers = parser.add_subparsers(dest='cmd')
     subparsers.required = True
 
-    parser_init_urldb = subparsers.add_parser('init_urldb')
-    parser_init_urldb.set_defaults(func=init_urldb)
+    parser_init = subparsers.add_parser('init')
+    parser_init_sub = parser_init.add_subparsers(dest='target')
+    parser_init_sub.required = True
+
+    parser_init_url = parser_init_sub.add_parser('url')
+    parser_init_url.set_defaults(func=init_urldb)
 
     # fetch
     parser_fetch = subparsers.add_parser('fetch')
