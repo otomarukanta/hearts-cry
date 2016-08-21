@@ -3,16 +3,17 @@ import bs4
 import re
 import itertools
 from heartscry.url_db import UrlDB
+from heartscry import Downloader
 
 
 YAHOO_KEIBA_URL = "http://keiba.yahoo.co.jp"
 URL = "{}/schedule/list/{}/?month={}"
+downloader = Downloader()
 
 
 def fetch_race_list_urls(year, month, day):
-    res = requests.get(URL.format(YAHOO_KEIBA_URL, year, month))
-    res.raise_for_status()
-    soup = bs4.BeautifulSoup(res.text, "lxml")
+    res = downloader.download(URL.format(YAHOO_KEIBA_URL, year, month))
+    soup = bs4.BeautifulSoup(res, "lxml")
 
     for line in soup.find(class_='scheLs').find_all('tr'):
         tds = line.find_all('td')
@@ -23,9 +24,8 @@ def fetch_race_list_urls(year, month, day):
 
 
 def fetch_race_result_urls(race_list_url):
-    res = requests.get("{}{}".format(YAHOO_KEIBA_URL, race_list_url))
-    res.raise_for_status()
-    soup = bs4.BeautifulSoup(res.text, "lxml")
+    res = downloader.download("{}{}".format(YAHOO_KEIBA_URL, race_list_url))
+    soup = bs4.BeautifulSoup(res, "lxml")
 
     for line in soup.find(class_='scheLs').find_all('tr'):
         tds = line.find_all('td')
