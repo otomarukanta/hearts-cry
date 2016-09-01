@@ -2,4 +2,7 @@
 build
 dist
 *.egg-info
-urls.db
+__pycache__
+.ipynb_checkpoints
+conf/
+*.ipynb
