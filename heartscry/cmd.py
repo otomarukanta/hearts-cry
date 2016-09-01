@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import argparse
 from logging import basicConfig, DEBUG
-from heartscry.crawler import race_result_url
+from heartscry.crawler import race_result_url, race_result
 from heartscry.manager import UrlManager
 
 
@@ -29,11 +29,16 @@ def parse_args():
     parser_fetch_sub = parser_fetch.add_subparsers(dest='target')
     parser_fetch_sub.required = True
 
+    # race_result_url
     parser_race_result_url = parser_fetch_sub.add_parser('race_result_url')
     parser_race_result_url.add_argument('year')
     parser_race_result_url.add_argument('month')
     parser_race_result_url.add_argument('day')
     parser_race_result_url.set_defaults(func=race_result_url)
+
+    # race_result
+    parser_race_result = parser_fetch_sub.add_parser('race_result')
+    parser_race_result.set_defaults(func=race_result)
     return parser.parse_args()
 
 
