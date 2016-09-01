@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
-from heartscry.model.url import ScrapedURL
+from heartscry.model.url import ScrapedURL, init_all
 import json
 
 
@@ -19,7 +19,7 @@ class UrlManager():
         self.engine = create_engine(URL(**self.db_conf))
 
     def init_url_tables(self):
-        ScrapedURL.init_all(self.engine)
+        init_all(self.engine)
 
     def insert_urls(self, urls):
         session = self.Session()
