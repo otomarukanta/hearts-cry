@@ -25,3 +25,4 @@ class UrlManager():
         session = self.Session()
         objs = [ScrapedURL(url=url, scraped=False) for url in urls]
         session.bulk_save_objects(objs)
+        session.commit()
