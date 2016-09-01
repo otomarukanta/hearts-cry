@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 import argparse
 from logging import basicConfig, DEBUG
-from heartscry.url_db import UrlDB
 from heartscry.crawler import race_result_url
+from heartscry.manager import UrlManager
+
 
 FETCH_TARGETS = ['race_result_url']
 
 
 def init_urldb(args):
-    db = UrlDB()
-    db.init_table('race_result_urls')
+    UrlManager().init_url_tables()
 
 
 def parse_args():

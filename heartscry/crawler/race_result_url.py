@@ -1,7 +1,7 @@
 import itertools
-from heartscry.url_db import UrlDB
 from heartscry import Downloader
 from heartscry.parser import ScheduleListParser, RaceListParser
+from heartscry.manager import UrlManager
 
 
 YAHOO_KEIBA_URL = "http://keiba.yahoo.co.jp"
@@ -9,6 +9,7 @@ URL = "{}/schedule/list/{}/?month={}"
 downloader = Downloader()
 sche_list_parser = ScheduleListParser()
 race_list_parser = RaceListParser()
+url_manager = UrlManager()
 
 
 def fetch_race_list_urls(year, month, day):
@@ -29,5 +30,4 @@ def race_result_url(args):
     race_result_urls = itertools.chain.from_iterable(
             [fetch_race_result_urls(url) for url in urls])
 
-    db = UrlDB()
-    [db.insert_url('race_result_urls', url) for url in race_result_urls]
+    url_manager.insert_urls(race_result_urls)
