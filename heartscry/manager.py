@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
-from heartscry.model.url import ScrapedURL, init_all
+from heartscry.model.url import TargetURL, init_all
 import json
 
 
@@ -23,6 +23,6 @@ class UrlManager():
 
     def insert_urls(self, urls):
         session = self.Session()
-        objs = [ScrapedURL(url=url, scraped=False) for url in urls]
+        objs = [TargetURL(url=url, scraped=False) for url in urls]
         session.bulk_save_objects(objs)
         session.commit()

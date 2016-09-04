@@ -10,8 +10,8 @@ def init_all(engine):
     DeclarativeBase.metadata.create_all(engine)
 
 
-class ScrapedURL(DeclarativeBase):
-    __tablename__ = "scraped_urls"
+class TargetURL(DeclarativeBase):
+    __tablename__ = "target_urls"
 
     url = Column(String, primary_key=True)
     scraped = Column(Boolean)
